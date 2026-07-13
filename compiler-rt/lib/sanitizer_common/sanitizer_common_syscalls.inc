@@ -175,7 +175,7 @@ static void kernel_read_iovec(const __sanitizer_iovec *iovec, SIZE_T iovlen,
 }
 
 PRE_SYSCALL(recvmsg)(long sockfd, sanitizer_kernel_msghdr *msg, long flags) {
-  PRE_READ(msg, sizeof(*msg));
+  PRE_READ(msg, __builtin_offsetof(sanitizer_kernel_msghdr, msg_flags));
 }
 
 POST_SYSCALL(recvmsg)
